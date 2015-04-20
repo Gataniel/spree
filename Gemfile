@@ -57,4 +57,4 @@ gem 'comfortable_mexican_sofa', '~> 1.12.0'
 
 
 # manage data
-gem 'yaml_db'
+gem 'yaml_db', github: 'turgu1/yaml_db'

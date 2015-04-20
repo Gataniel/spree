@@ -1,0 +1,370 @@
+
+---
+spree_roles:
+  columns:
+  - id
+  - name
+  records: 
+  - - 1
+    - admin
+
+---
+spree_roles_users:
+  columns:
+  - role_id
+  - user_id
+  records: 
+  - - 1
+    - 1
+
+---
+spree_shipping_categories:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Default
+    - '2015-04-20 11:46:02.048656'
+    - '2015-04-20 11:46:02.048656'
+
+---
+spree_stock_locations:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - default
+  - address1
+  - address2
+  - city
+  - state_id
+  - state_name
+  - country_id
+  - zipcode
+  - phone
+  - active
+  - backorderable_default
+  - propagate_all_variants
+  - admin_name
+  records: 
+  - - 1
+    - default
+    - '2015-04-20 11:45:57.793810'
+    - '2015-04-20 11:45:57.793810'
+    - false
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - true
+    - true
+    - true
+    - 
+
+---
+spree_stores:
+  columns:
+  - id
+  - name
+  - url
+  - meta_description
+  - meta_keywords
+  - seo_title
+  - mail_from_address
+  - default_currency
+  - code
+  - default
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Spree Demo Site
+    - demo.spreecommerce.com
+    - 
+    - 
+    - 
+    - spree@example.com
+    - 
+    - spree
+    - true
+    - '2015-04-20 11:46:02.508537'
+    - '2015-04-20 11:46:02.508537'
+
+---
+spree_return_authorization_reasons:
+  columns:
+  - id
+  - name
+  - active
+  - mutable
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Better price available
+    - true
+    - true
+    - '2015-04-20 11:46:02.957115'
+    - '2015-04-20 11:46:02.957115'
+  - - 2
+    - Missed estimated delivery date
+    - true
+    - true
+    - '2015-04-20 11:46:02.961461'
+    - '2015-04-20 11:46:02.961461'
+  - - 3
+    - Missing parts or accessories
+    - true
+    - true
+    - '2015-04-20 11:46:02.964549'
+    - '2015-04-20 11:46:02.964549'
+  - - 4
+    - Damaged/Defective
+    - true
+    - true
+    - '2015-04-20 11:46:02.968077'
+    - '2015-04-20 11:46:02.968077'
+  - - 5
+    - Different from what was ordered
+    - true
+    - true
+    - '2015-04-20 11:46:02.970737'
+    - '2015-04-20 11:46:02.970737'
+  - - 6
+    - Different from description
+    - true
+    - true
+    - '2015-04-20 11:46:02.973389'
+    - '2015-04-20 11:46:02.973389'
+  - - 7
+    - No longer needed/wanted
+    - true
+    - true
+    - '2015-04-20 11:46:02.977325'
+    - '2015-04-20 11:46:02.977325'
+  - - 8
+    - Accidental order
+    - true
+    - true
+    - '2015-04-20 11:46:02.981511'
+    - '2015-04-20 11:46:02.981511'
+  - - 9
+    - Unauthorized purchase
+    - true
+    - true
+    - '2015-04-20 11:46:02.984356'
+    - '2015-04-20 11:46:02.984356'
+
+---
+spree_refund_reasons:
+  columns:
+  - id
+  - name
+  - active
+  - mutable
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Return processing
+    - true
+    - false
+    - '2015-04-20 11:46:03.049040'
+    - '2015-04-20 11:46:03.049040'
+
+---
+spree_reimbursement_types:
+  columns:
+  - id
+  - name
+  - active
+  - mutable
+  - created_at
+  - updated_at
+  - type
+  records: 
+  - - 1
+    - original
+    - true
+    - true
+    - '2015-04-20 11:46:03.158545'
+    - '2015-04-20 11:46:03.208213'
+    - Spree::ReimbursementType::OriginalPayment
+
+---
+spree_users:
+  columns:
+  - id
+  - encrypted_password
+  - password_salt
+  - email
+  - remember_token
+  - persistence_token
+  - reset_password_token
+  - perishable_token
+  - sign_in_count
+  - failed_attempts
+  - last_request_at
+  - current_sign_in_at
+  - last_sign_in_at
+  - current_sign_in_ip
+  - last_sign_in_ip
+  - login
+  - ship_address_id
+  - bill_address_id
+  - authentication_token
+  - unlock_token
+  - locked_at
+  - reset_password_sent_at
+  - created_at
+  - updated_at
+  - spree_api_key
+  - remember_created_at
+  - deleted_at
+  - confirmation_token
+  - confirmed_at
+  - confirmation_sent_at
+  records: 
+  - - 1
+    - 9e838a017bcff7c0309c10e8d8302bb017640ce9708b88feb03e817bda14a7144fe6e7d3512ed0964ef1c6fd18d1c2dd751b256755893ab88a877d6894fac2ec
+    - ceV98xAuH-6CPNvsmAAN
+    - admin@admin.com
+    - bMaWwHwzRtzRyhz9_rkw
+    - 
+    - 
+    - 
+    - 5
+    - 0
+    - 
+    - '2015-04-20 13:33:09.321329'
+    - '2015-04-20 12:45:42.058101'
+    - 127.0.0.1
+    - 127.0.0.1
+    - admin@admin.com
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - '2015-04-20 12:11:14.449011'
+    - '2015-04-20 13:33:09.323901'
+    - c20d177c59d541109b3c5c3f54ac044b3d8ab60c02acfe7f
+    - '2015-04-20 12:11:26.771579'
+    - 
+    - 
+    - 
+    - 
+
+---
+comfy_cms_sites:
+  columns:
+  - id
+  - label
+  - identifier
+  - hostname
+  - path
+  - locale
+  - is_mirrored
+  records: 
+  - - 1
+    - store
+    - store
+    - localhost
+    - ''
+    - ru
+    - true
+
+---
+comfy_cms_layouts:
+  columns:
+  - id
+  - site_id
+  - parent_id
+  - app_layout
+  - label
+  - identifier
+  - content
+  - css
+  - js
+  - position
+  - is_shared
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - 1
+    - 
+    - application
+    - home
+    - home
+    - "{{ cms:page:content:rich_text }}"
+    - ''
+    - ''
+    - 0
+    - false
+    - '2015-04-20 12:04:03.413367'
+    - '2015-04-20 12:04:03.413367'
+
+---
+comfy_cms_pages:
+  columns:
+  - id
+  - site_id
+  - layout_id
+  - parent_id
+  - target_page_id
+  - label
+  - slug
+  - full_path
+  - content_cache
+  - position
+  - children_count
+  - is_published
+  - is_shared
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - 1
+    - 1
+    - 
+    - 
+    - home
+    - 
+    - "/"
+    - ''
+    - 0
+    - 0
+    - true
+    - false
+    - '2015-04-20 12:04:58.144301'
+    - '2015-04-20 12:04:58.144301'
+
+---
+comfy_cms_blocks:
+  columns:
+  - id
+  - identifier
+  - content
+  - blockable_id
+  - blockable_type
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - content
+    - |
+      --- ''
+    - 1
+    - Comfy::Cms::Page
+    - '2015-04-20 12:04:58.148306'
+    - '2015-04-20 12:04:58.148306'

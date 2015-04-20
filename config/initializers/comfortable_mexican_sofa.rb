@@ -9,12 +9,12 @@ ComfortableMexicanSofa.configure do |config|
 
   # Module responsible for authentication. You can replace it with your own.
   # It simply needs to have #authenticate method. See http_auth.rb for reference.
-    config.admin_auth = 'ComfyAdminAuthentication'
+  #   config.admin_auth = 'ComfyAdminAuthentication'
 
   # Module responsible for authorization on admin side. It should have #authorize
   # method that returns true or false based on params and loaded instance
   # variables available for a given controller.
-    config.admin_authorization = 'ComfyAdminAuthorization'
+  #   config.admin_authorization = 'ComfyAdminAuthorization'
 
   # Module responsible for public authentication. Similar to the above. You also
   # will have access to @cms_site, @cms_layout, @cms_page so you can use them in
@@ -100,18 +100,20 @@ end
 # ComfortableMexicanSofa::AccessControl::AdminAuthentication.password = 'password'
 
 # Uncomment this module and `config.admin_auth` above to use custom admin authentication
-module ComfyAdminAuthentication
-  def authenticate
-    return true
-  end
-end
-
-# Uncomment this module and `config.admin_authorization` above to use custom admin authorization
-module ComfyAdminAuthorization
-  def authorize
-    return true
-  end
-end
+# module ComfyAdminAuthentication
+#   def authenticate
+#     # spree_current_user.try!(:admin?) #TODO странное поведение, результаты выполнения этих методов не влияют на то, что приложение все равно пускает в админку. Сделаю бефорфильтр в админке
+#     true
+#   end
+# end
+#
+# # Uncomment this module and `config.admin_authorization` above to use custom admin authorization
+# module ComfyAdminAuthorization
+#   def authorize
+#     # spree_current_user.try!(:admin?)
+#     true
+#   end
+# end
 
 # Uncomment this module and `config.public_auth` above to use custom public authentication
 # module ComfyPublicAuthentication
