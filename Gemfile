@@ -46,6 +46,11 @@ group :development, :test do
 end
 
 
+# store Engine
 gem 'spree', '3.0.0'
 gem 'spree_gateway', github: 'spree/spree_gateway', branch: '3-0-stable'
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-0-stable'
+
+
+# cms Engine
+gem 'comfortable_mexican_sofa', '~> 1.12.0'
