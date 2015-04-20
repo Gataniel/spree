@@ -54,3 +54,7 @@ gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-0-stable'
 
 # cms Engine
 gem 'comfortable_mexican_sofa', '~> 1.12.0'
+
+
+# manage data
+gem 'yaml_db'
