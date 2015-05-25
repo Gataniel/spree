@@ -1,12 +1,19 @@
 Rails.application.routes.draw do
 
-  mount Spree::Core::Engine, :at => '/'
+  mount Spree::Core::Engine, at: '/'
 
 
-  comfy_route :cms_admin, :path => '/cms'
+  comfy_route :cms_admin, path: '/cms'
 
   # Make sure this routeset is defined last
-  comfy_route :cms, :path => '/', :sitemap => true
+  comfy_route :cms, path: '/', sitemap: true
+
+  namespace :gateway do
+    get '/robokassa/:gateway_id/:order_id' => 'robokassa#show',    as: :robokassa
+    get '/robokassa/result'                => 'robokassa#result',  as: :robokassa_result
+    get '/robokassa/success'               => 'robokassa#success', as: :robokassa_success
+    get '/robokassa/fail'                  => 'robokassa#fail',    as: :robokassa_fail
+  end
 
   # This line mounts Spree's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to Spree::ProductsController.

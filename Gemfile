@@ -58,3 +58,9 @@ gem 'comfortable_mexican_sofa', '~> 1.12.0'
 
 # manage data
 gem 'yaml_db', github: 'turgu1/yaml_db'
+
+# disable assets log
+gem 'quiet_assets', group: :development
+
+gem "slim-rails"
+gem 'simple_form'
