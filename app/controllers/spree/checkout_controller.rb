@@ -5,6 +5,8 @@ module Spree
   # is waranted.
   class CheckoutController < Spree::StoreController
     before_action :load_order_with_lock
+    before_filter :redirect_to_onpay, :only => :update
+
     before_filter :ensure_valid_state_lock_version, only: [:update]
     before_filter :set_state_if_present
 
@@ -69,7 +71,14 @@ module Spree
     #
     # end
 
+    def redirect_to_onpay
+      return unless params[:state] == "payment"
+      payment_method = PaymentMethod.find(params[:order][:payments_attributes].first[:payment_method_id])
+      if payment_method.kind_of? Gateway::Onpay
+        redirect_to gateway_onpay_path(:gateway_id => payment_method.id, :order_id => @order.id)
+      end
 
+    end
 
 
 
