@@ -1,0 +1,135 @@
+<table>
+  <tr>
+    <td><label><%=t("name")%></label></td>
+    <td><%= text_field :payment_method, :name, {"style" => "width:200px"} %></td>
+  </tr>
+  <tr>
+    <td><label><%=t("description")%></label></td>
+    <td><%= text_area :payment_method, :description, {:cols => 60, :rows => 4} %></td>
+  </tr>
+  <tr>
+    <td><label><%=t("environment")%></label></td>
+    <td>
+      <%= collection_select(:payment_method, :environment, Configuration.configurations.keys, :to_s, :titleize, {}, {:id => "gtwy-env"}) %>
+    </td>
+  </tr>
+  <tr>
+    <td><label><%=t("display")%></label></td>
+    <td>
+      <%= select(:payment_method, :display_on, PaymentMethod::DISPLAY.collect {|display| [t(display), display == :both ? nil : display.to_s]}) %>
+    </td>
+  </tr>
+  <tr>
+    <td><label><%= t("active") %></label></td>
+    <td>
+      <label class="sub">
+        <%= radio_button(:payment_method, :active, true ) %>
+        <%= t("yes") %>
+      </label> &nbsp;
+      <label class="sub">
+        <%= radio_button(:payment_method, :active, false ) %>
+        <%= t("no") %>
+      </label>
+    </td>
+  </tr>
+</table>
+
+<h2><%= t('settings') %></h2>
+
+<div id="preference-settings">
+  <% unless @object.new_record? %>
+	<table>
+	<tr>
+		<td>
+			<%= f.label(:type, t("provider")) %>
+			<%= collection_select(:payment_method, :type, @providers, :to_s, :name, {}, {:id => "gtwy-type"}) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label("preferred_test_mode", t("test_mode")+": ") %>
+			<%= f.check_box("preferred_test_mode", {:value => @payment_method.preferences["test_mode"]}) %>
+		</td>
+	</tr>
+	<tr><td>
+		<ul>
+			<li><b>Да:</b> Расчеты ведутся в тестовой валюте (TST). Может использоватся только для тестирования платежей.</li>
+			<li><b>Нет:</b> Расчеты ведутся в выбранной валюте.</li>
+		</ul>	
+	</td></tr>
+	<tr>
+		<td>
+			<%= f.label("preferred_priv_code", t("priv_code")+": ") %>
+ 			<%= f.text_field("preferred_priv_code",{:size => 10, :class => 'input_string',:value => @payment_method.preferences["priv_code"]}) %>
+		</td>
+ 	</tr>
+	<tr><td>
+		<ul>
+			<li>Секретный ключ для вычисления контрольной подписи при отправке уведомлений о поступлении платежей в вашу систему и сверки с контрольной подписью, полученной при переходе пользователей по ссылкам\формам с вашего сайта.</li>
+		</ul>
+	</td><tr>	
+	<tr>
+		<td>
+			<%= f.label("preferred_onpay_login", t("onpay_login")+": ") %>
+ 			<%= f.text_field("preferred_onpay_login",{:size => 10, :class => 'input_string',:value => @payment_method.preferences["onpay_login"]}) %>
+		</td>
+ 	</tr>
+	<tr><td>
+		<ul>
+			<li>Ваш логин в сервисе приема платежей Onpay.</li>
+		</ul>
+	</td><tr>
+	<tr>
+		<td>
+			<%= f.label("preferred_price_final", t("price_final")+": ") %>
+			<%= f.check_box("preferred_price_final", {:value => @payment_method.preferences["price_final"]}) %>
+		</td>
+	</tr>
+	<tr><td>
+		<ul>
+			<li><b>Да:</b> Комиссию сервиса приема платежей взымать с продавца.</li>
+			<li><b>Нет:</b> Комиссию сервиса приема платежей взымать с покупателя.</li>
+		</ul>	
+	</td><tr>
+	<tr>
+		<td>
+			<%= f.label("preferred_convert_currency", t("convert_currency")+": ") %>
+			<%= f.check_box("preferred_convert_currency", {:value => @payment_method.preferences["convert_currency"]}) %>
+		</td>
+	</tr>
+	<tr><td>
+		<ul>
+			<li><b>Да:</b> Все поступающие платежи будут конвертироваться в валюту ценника.</li>
+			<li><b>Нет:</b> Получение той валюты, которой платит клиент.</li>
+		</ul>
+	</td></tr>
+	<tr>
+		<td>
+			<%= f.label("preferred_pay_type", t("pay_type")+": ") %>
+ 			<%= f.text_field("preferred_pay_type",{:size => 10, :class => 'input_string',:value => @payment_method.preferences["pay_type"]}) %>
+		</td>
+ 	</tr>
+	<tr><td>
+		<ul>
+			<li><b>free:</b> Пользователь сможет менять сумму платежа в платежной форме.</li>
+			<li><b>fix:</b> Пользователю будет показана сумма к зачислению (т.е. за вычетом всех комиссий) без возможности её редактирования.</li>
+		</ul>
+	</td></tr>
+	<tr>
+		<td>
+			<%= f.label("preferred_currency", t("currency")+": ") %>
+ 			<%= f.text_field("preferred_currency",{:size => 10, :class => 'input_string',:value => @payment_method.preferences["currency"]}) %>
+		</td>
+ 	</tr>
+	<tr><td>
+		<ul>
+			<li><b>RUR (по умолчанию):</b> Основная валюта ценника.</li>
+		</ul>	
+	</td></tr>
+	</table>
+    
+    <% if @object.respond_to?(:preferences) %>
+      <div id="gateway-settings-warning" style="color:#FF0000"><%= t('provider_settings_warning')%></div>
+    <% end %>
+  <% end %>
+

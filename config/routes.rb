@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     get '/robokassa/fail'                  => 'robokassa#fail',    as: :robokassa_fail
   end
 
+  get '/onpay/:gateway_id/:order_id' => 'spree/gateway/onpay#show',    :as => :true_onpay
+
+
   # This line mounts Spree's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to Spree::ProductsController.
   # If you would like to change where this engine is mounted, simply change the :at option to something different.
