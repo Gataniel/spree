@@ -4,9 +4,7 @@ module Spree
   # checkout which has nothing to do with updating an order that this approach
   # is waranted.
   class CheckoutController < Spree::StoreController
-    before_filter :onpay_check, :load_order_with_lock, :ensure_order_not_completed,
-      :ensure_checkout_allowed, :ensure_sufficient_stock_lines,
-      :ensure_valid_state, :associate_user, :check_authorization, :apply_coupon_code,
+    before_filter :onpay_check , :associate_user, :check_authorization, :apply_coupon_code,
       :setup_for_current_state
     before_action :load_order_with_lock
     before_filter :redirect_to_onpay, :only => :update
@@ -81,24 +79,11 @@ module Spree
       if payment_method.kind_of? Gateway::Onpay
         redirect_to gateway_onpay_path(:gateway_id => payment_method.id, :order_id => @order.id)
       end
-
-<<<<<<< HEAD
-    def redirect_to_onpay
-      return unless params[:state] == "payment"
-      payment_method = PaymentMethod.find(params[:order][:payments_attributes].first[:payment_method_id])
-      if payment_method.kind_of? Gateway::Onpay
-        redirect_to gateway_onpay_path(:gateway_id => payment_method.id, :order_id => @order.id)
-      end
     end
-=======
-    end
-
->>>>>>> bf1438f105139b9bf0fa389357d7c65f27924955
-
 
     def onpay_check
 
-      if params[:order] and params[:order][:payments_attributes] and params[:order][:payments_attributes].first[:payment_method_id] == '7'
+      if params[:order] and params[:order][:payments_attributes] and params[:order][:payments_attributes].first[:payment_method_id] == '3'
       @order = current_order(lock: true)
       redirect_to spree.cart_path and return unless @order
 
