@@ -4,20 +4,23 @@ module Spree
   # checkout which has nothing to do with updating an order that this approach
   # is waranted.
   class CheckoutController < Spree::StoreController
-    before_action :load_order_with_lock
-    before_filter :ensure_valid_state_lock_version, only: [:update]
-    before_filter :set_state_if_present
+    before_filter :onpay_check, :load_order_with_lock, :ensure_order_not_completed,
+      :ensure_checkout_allowed, :ensure_sufficient_stock_lines,
+      :ensure_valid_state, :associate_user, :check_authorization, :apply_coupon_code,
+      :setup_for_current_state
 
-    before_action :ensure_order_not_completed
-    before_action :ensure_checkout_allowed
-    before_action :ensure_sufficient_stock_lines
-    before_action :ensure_valid_state
-
-    before_action :associate_user
-    before_action :check_authorization
-    before_action :apply_coupon_code
-
-    before_action :setup_for_current_state
+    # before_filter :load_order_with_lock
+    #
+    # before_filter :ensure_order_not_completed
+    # before_filter :ensure_checkout_allowed
+    # before_filter :ensure_sufficient_stock_lines
+    # before_filter :ensure_valid_state
+    #
+    # before_filter :associate_user
+    # before_filter :check_authorization
+    # before_filter :apply_coupon_code
+    #
+    # before_filter :setup_for_current_state
 
     helper 'spree/orders'
 
@@ -25,10 +28,8 @@ module Spree
 
     # Updates the order and advances to the next state (when possible.)
     def update
-
-      if @order.update_from_params(params, permitted_checkout_attributes, request.headers.env)
-        @order.temporary_address = !params[:save_user_address]
-
+      if @order.update_from_params(params, permitted_checkout_attributes)
+        persist_user_address
         unless @order.next
           flash[:error] = @order.errors.full_messages.join("\n")
           redirect_to checkout_state_path(@order.state) and return
@@ -70,7 +71,13 @@ module Spree
     # end
 
 
-
+    def redirect_to_onpay
+      return unless params[:state] == "payment"
+      payment_method = PaymentMethod.find(params[:order][:payments_attributes].first[:payment_method_id])
+      if payment_method.kind_of? Gateway::Onpay
+        redirect_to gateway_onpay_path(:gateway_id => payment_method.id, :order_id => @order.id)
+      end
+    end
 
 
     def onpay_check

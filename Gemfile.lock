@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/Gataniel/spree_onpay_2.2.0.git
+  revision: 450e9e31e496b5333c96273e5cc69fce48a0e07e
+  specs:
+    spree_onpay (0.2.2)
+      spree_core (>= 0.40.0)
+
+GIT
   remote: git://github.com/spree-contrib/spree_i18n.git
   revision: d15edfb106e93e5dbc3fcf518f60defc62ee30a1
   branch: 3-0-stable
@@ -431,6 +438,7 @@ DEPENDENCIES
   spree_auth_devise!
   spree_gateway!
   spree_i18n!
+  spree_onpay!
   spring
   sqlite3
   turbolinks
