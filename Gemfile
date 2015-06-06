@@ -64,3 +64,5 @@ gem 'quiet_assets', group: :development
 
 gem "slim-rails"
 gem 'simple_form'
+
+gem 'spree_onpay', :git => 'git://github.com/Gataniel/spree_onpay_2.2.0.git'

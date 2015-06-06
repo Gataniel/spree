@@ -18,3 +18,4 @@ end
 Spree.user_class = "Spree::User"
 
 Rails.application.config.spree.payment_methods << Spree::Gateway::Robokassa
+Rails.application.config.spree.payment_methods << Gateway::Onpay

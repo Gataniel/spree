@@ -1,6 +1,6 @@
 <%#= render :partial => 'admin/shared/configuration_menu' %>
 <h1><%= t("editing_payment_method") %></h1>
-<%# = render "shared/error_messages", :target => @payment_method %>
+<%#= render "shared/error_messages", :target => @payment_method %>
 <%= form_for(@payment_method, :url => admin_payment_method_path(@payment_method), :html => { :method => :put }) do |f| %>
   <%= render :template => 'templates/payment_methods/_form.html.erb', :locals => { :f => f } %>
   <p>
