@@ -8,6 +8,11 @@ module Spree
       :ensure_checkout_allowed, :ensure_sufficient_stock_lines,
       :ensure_valid_state, :associate_user, :check_authorization, :apply_coupon_code,
       :setup_for_current_state
+    before_action :load_order_with_lock
+    before_filter :redirect_to_onpay, :only => :update
+
+    before_filter :ensure_valid_state_lock_version, only: [:update]
+    before_filter :set_state_if_present
 
     # before_filter :load_order_with_lock
     #
@@ -70,7 +75,14 @@ module Spree
     #
     # end
 
+    def redirect_to_onpay
+      return unless params[:state] == "payment"
+      payment_method = PaymentMethod.find(params[:order][:payments_attributes].first[:payment_method_id])
+      if payment_method.kind_of? Gateway::Onpay
+        redirect_to gateway_onpay_path(:gateway_id => payment_method.id, :order_id => @order.id)
+      end
 
+<<<<<<< HEAD
     def redirect_to_onpay
       return unless params[:state] == "payment"
       payment_method = PaymentMethod.find(params[:order][:payments_attributes].first[:payment_method_id])
@@ -78,6 +90,10 @@ module Spree
         redirect_to gateway_onpay_path(:gateway_id => payment_method.id, :order_id => @order.id)
       end
     end
+=======
+    end
+
+>>>>>>> bf1438f105139b9bf0fa389357d7c65f27924955
 
 
     def onpay_check
