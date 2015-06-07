@@ -1,4 +1,4 @@
-class Spree::Calculator::Shipping::EmsCalculator < Spree::Calculator
+class Spree::Calculator::Shipping::EmsCalculator < Spree::ShippingCalculator
   def self.description
     'Калькулятор экспресс доставки EMS'
   end
