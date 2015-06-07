@@ -9,7 +9,7 @@ module Spree
     before_action :load_order_with_lock
     before_filter :redirect_to_onpay, :only => :update
 
-    before_filter :ensure_valid_state_lock_version, only: [:update]
+    # before_filter :ensure_valid_state_lock_version, only: [:update]
     # before_filter :set_state_if_present
 
     # before_filter :load_order_with_lock

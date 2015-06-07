@@ -7,12 +7,6 @@ Rails.application.routes.draw do
   # We ask that you don't use the :as option here, as Spree relies on it being the default of "spree"
   mount Spree::Core::Engine, at: '/'
 
-
-  # comfy_route :cms_admin, path: '/cms'
-
-  # Make sure this routeset is defined last
-  # comfy_route :cms, path: '/', sitemap: true
-
   namespace :gateway do
     get '/robokassa/:gateway_id/:order_id' => 'robokassa#show',    as: :robokassa
     get '/robokassa/result'                => 'robokassa#result',  as: :robokassa_result
@@ -86,4 +80,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  comfy_route :cms_admin, path: '/cms'
+  # Make sure this routeset is defined last
+  comfy_route :cms, path: '/', sitemap: true
 end
