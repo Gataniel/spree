@@ -10,7 +10,7 @@ module Spree
     before_filter :redirect_to_onpay, :only => :update
 
     before_filter :ensure_valid_state_lock_version, only: [:update]
-    before_filter :set_state_if_present
+    # before_filter :set_state_if_present
 
     # before_filter :load_order_with_lock
     #
@@ -93,7 +93,7 @@ module Spree
 
         # if payment_method.kind_of? Spree::Gateway::Onpay
 
-          redirect_to "/onpay/#{payment_method.id}/#{@order.id}"
+          redirect_to "/gateway/onpay/#{payment_method.id}/#{@order.id}"
           # redirect_to true_onpay_path(:gateway_id => payment_method.id, :order_id => @order.id)
           # redirect_to '/'
 

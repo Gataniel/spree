@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   mount Spree::Core::Engine, at: '/'
 
 
-  comfy_route :cms_admin, path: '/cms'
+  # comfy_route :cms_admin, path: '/cms'
 
   # Make sure this routeset is defined last
-  comfy_route :cms, path: '/', sitemap: true
+  # comfy_route :cms, path: '/', sitemap: true
 
   namespace :gateway do
     get '/robokassa/:gateway_id/:order_id' => 'robokassa#show',    as: :robokassa
@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
   get '/onpay/:gateway_id/:order_id' => 'spree/gateway/onpay#show',    :as => :true_onpay
 
+  namespace :gateway do
+    get '/onpay/:gateway_id/:order_id' => 'onpay#show',    :as => :onpay
+    get '/onpay/api' => 'onpay#api', :as => :onpay_api
+  end
 
   # This line mounts Spree's routes at the root of your application.
   # This means, any requests to URLs such as /products, will go to Spree::ProductsController.
